@@ -1,7 +1,12 @@
 package validations;
 
 public interface FieldValidator<T> {
-     T validate(T value);
+
+     default T validate(Object o) {
+          return validateInternal(supportedType().cast(o));
+     }
+
+     T validateInternal(T value);
 
      Class<T> supportedType();
 }
